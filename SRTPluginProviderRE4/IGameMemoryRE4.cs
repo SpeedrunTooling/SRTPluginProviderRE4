@@ -20,5 +20,9 @@ namespace SRTPluginProviderRE4
 
         // Money
         int Money { get; set; }
+
+        int IGT { get; set; }
+        TimeSpan IGTTimeSpan { get; }
+        string IGTFormattedString { get; }
     }
 }

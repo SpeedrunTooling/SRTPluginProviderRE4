@@ -11,6 +11,7 @@ namespace SRTPluginProviderRE4
 {
     public class GameMemoryRE4 : IGameMemoryRE4
     {
+        private const string IGT_TIMESPAN_STRING_FORMAT = @"hh\:mm\:ss";
         public string GameName => "RE4";
 
         // Versioninfo
@@ -34,5 +35,24 @@ namespace SRTPluginProviderRE4
         public int Money { get => _money; set => _money = value; }
         internal int _money;
 
+        public int IGT { get => _igt; set => _igt = value; }
+        internal int _igt;
+
+        public TimeSpan IGTTimeSpan
+        {
+            get
+            {
+                TimeSpan timespanIGT;
+
+                if (IGT >= 0f)
+                    timespanIGT = TimeSpan.FromSeconds(IGT / 60);
+                else
+                    timespanIGT = new TimeSpan();
+
+                return timespanIGT;
+            }
+        }
+
+        public string IGTFormattedString => IGTTimeSpan.ToString(IGT_TIMESPAN_STRING_FORMAT, CultureInfo.InvariantCulture);
     }
 }

@@ -21,6 +21,7 @@ namespace SRTPluginProviderRE4
         private int* pointerAddressMaxHP;
         private int* pointerAddressHP2;
         private int* pointerAddressMaxHP2;
+        private int* pointerAddressIGT;
 
         // Pointer Classes
         private IntPtr BaseAddress { get; set; }
@@ -54,7 +55,7 @@ namespace SRTPluginProviderRE4
             pointerAddressMaxHP = (int*)0xA3F716;
             pointerAddressHP2 = (int*)0xA3F718;
             pointerAddressMaxHP2 = (int*)0xA3F71A;
-            //pointerAddressIGT = (int*)0xA3FA6C; // Cut Performance In Half Advise Against it.
+            pointerAddressIGT = (int*)0xA3FA6C;
         }
 
         internal void UpdatePointers()
@@ -79,6 +80,9 @@ namespace SRTPluginProviderRE4
             // Ashley HP
             fixed (short* p = &gameMemoryValues._playerCurrentHealth2)
                 success = memoryAccess.TryGetShortAt(pointerAddressHP2, p);
+
+            fixed (short* p = &gameMemoryValues._playerMaxHealth2)
+                success = memoryAccess.TryGetShortAt(pointerAddressMaxHP2, p);
 
             fixed (short* p = &gameMemoryValues._playerMaxHealth2)
                 success = memoryAccess.TryGetShortAt(pointerAddressMaxHP2, p);

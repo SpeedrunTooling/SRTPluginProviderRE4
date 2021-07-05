@@ -17,26 +17,9 @@ namespace SRTPluginProviderRE4
         // Versioninfo
         public string VersionInfo => FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
 
-        // Leon HP
-        public short PlayerCurrentHealth { get => _playerCurrentHealth; set => _playerCurrentHealth = value; }
-        internal short _playerCurrentHealth;
-
-        public short PlayerMaxHealth { get => _playerMaxHealth; set => _playerMaxHealth = value; }
-        internal short _playerMaxHealth;
-
-        // Ashley HP
-        public short PlayerCurrentHealth2 { get => _playerCurrentHealth2; set => _playerCurrentHealth2 = value; }
-        internal short _playerCurrentHealth2;
-
-        public short PlayerMaxHealth2 { get => _playerMaxHealth2; set => _playerMaxHealth2 = value; }
-        internal short _playerMaxHealth2;
-
-        // Money
-        public int Money { get => _money; set => _money = value; }
-        internal int _money;
-
-        public int IGT { get => _igt; set => _igt = value; }
-        internal int _igt;
+        // Game Data
+        public GameSaveData GameData { get => _gameData; set => _gameData = value; }
+        internal GameSaveData _gameData;
 
         public TimeSpan IGTTimeSpan
         {
@@ -44,8 +27,8 @@ namespace SRTPluginProviderRE4
             {
                 TimeSpan timespanIGT;
 
-                if (IGT >= 0f)
-                    timespanIGT = TimeSpan.FromSeconds(IGT / 60);
+                if (GameData.IGTFrames >= 0f)
+                    timespanIGT = TimeSpan.FromSeconds(GameData.IGTFrames / 60);
                 else
                     timespanIGT = new TimeSpan();
 

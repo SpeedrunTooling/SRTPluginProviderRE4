@@ -16,12 +16,7 @@ namespace SRTPluginProviderRE4
         public int ProcessExitCode => (memoryAccess != null) ? memoryAccess.ProcessExitCode : 0;
 
         // Pointer Address Variables
-        private int* pointerAddressMoney;
-        private int* pointerAddressHP;
-        private int* pointerAddressMaxHP;
-        private int* pointerAddressHP2;
-        private int* pointerAddressMaxHP2;
-        private int* pointerAddressIGT;
+        private int pointerAddressGameData;
 
         // Pointer Classes
         private IntPtr BaseAddress { get; set; }
@@ -50,42 +45,13 @@ namespace SRTPluginProviderRE4
 
         private void SelectPointerAddresses()
         {
-            pointerAddressMoney = (int*)0xA3F708;
-            pointerAddressHP = (int*)0xA3F714;
-            pointerAddressMaxHP = (int*)0xA3F716;
-            pointerAddressHP2 = (int*)0xA3F718;
-            pointerAddressMaxHP2 = (int*)0xA3F71A;
-            pointerAddressIGT = (int*)0xA3FA6C;
-        }
-
-        internal void UpdatePointers()
-        {
+            pointerAddressGameData = 0x85F6F4;
         }
 
         internal unsafe IGameMemoryRE4 Refresh()
         {
-            bool success;
-
-            // Money
-            fixed (int* p = &gameMemoryValues._money)
-                success = memoryAccess.TryGetIntAt(pointerAddressMoney, p);
-
-            // Leon HP
-            fixed (short* p = &gameMemoryValues._playerCurrentHealth)
-                success = memoryAccess.TryGetShortAt(pointerAddressHP, p);
-
-            fixed (short* p = &gameMemoryValues._playerMaxHealth)
-                success = memoryAccess.TryGetShortAt(pointerAddressMaxHP, p);
-
-            // Ashley HP
-            fixed (short* p = &gameMemoryValues._playerCurrentHealth2)
-                success = memoryAccess.TryGetShortAt(pointerAddressHP2, p);
-
-            fixed (short* p = &gameMemoryValues._playerMaxHealth2)
-                success = memoryAccess.TryGetShortAt(pointerAddressMaxHP2, p);
-
-            fixed (short* p = &gameMemoryValues._playerMaxHealth2)
-                success = memoryAccess.TryGetShortAt(pointerAddressMaxHP2, p);
+            // Game Data
+            gameMemoryValues._gameData = memoryAccess.GetAt<GameSaveData>(IntPtr.Add(BaseAddress, pointerAddressGameData));
 
             HasScanned = true;
             return gameMemoryValues;

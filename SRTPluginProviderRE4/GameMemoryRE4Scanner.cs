@@ -18,6 +18,9 @@ namespace SRTPluginProviderRE4
         // Pointer Address Variables
         private int pointerAddressGameData;
 
+        private int pointerAddressHP;
+        private int pointerAddressHP2;
+
         // Pointer Classes
         private IntPtr BaseAddress { get; set; }
 
@@ -46,12 +49,20 @@ namespace SRTPluginProviderRE4
         private void SelectPointerAddresses()
         {
             pointerAddressGameData = 0x85F6F4;
+            pointerAddressHP = 0x85F714;
+            pointerAddressHP2 = 0x85F718;
         }
 
         internal unsafe IGameMemoryRE4 Refresh()
         {
             // Game Data
             gameMemoryValues._gameData = memoryAccess.GetAt<GameSaveData>(IntPtr.Add(BaseAddress, pointerAddressGameData));
+
+            gameMemoryValues._player = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP));
+            gameMemoryValues._playerName = "Leon: ";
+
+            gameMemoryValues._player2 = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP2));
+            gameMemoryValues._playerName2 = "Ashley: ";
 
             HasScanned = true;
             return gameMemoryValues;

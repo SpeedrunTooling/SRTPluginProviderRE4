@@ -10,6 +10,12 @@ namespace SRTPluginProviderRE4
         string GameName { get; }
         string VersionInfo { get; }
         GameSaveData GameData { get; set; }
+        PlayerKills GamePlayerKills { get; set; }
+        InventoryIDs GamePlayerItemID { get; set; }
+        GamePlayer Player { get; set; }
+        GamePlayer Player2 { get; set; }
+        string PlayerName { get; set; }
+        string PlayerName2 { get; set; }
         TimeSpan IGTTimeSpan { get; }
         string IGTFormattedString { get; }
     }

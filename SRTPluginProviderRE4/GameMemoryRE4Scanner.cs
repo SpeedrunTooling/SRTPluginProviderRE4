@@ -22,9 +22,6 @@ namespace SRTPluginProviderRE4
         private int pointerAddressHP;
         private int pointerAddressHP2;
 
-        private int pointerAddressHP;
-        private int pointerAddressHP2;
-
         // Pointer Classes
         private IntPtr BaseAddress { get; set; }
 
@@ -65,12 +62,6 @@ namespace SRTPluginProviderRE4
             gameMemoryValues._gameData = memoryAccess.GetAt<GameSaveData>(IntPtr.Add(BaseAddress, pointerAddressGameData));
             gameMemoryValues._playerKills = memoryAccess.GetAt<PlayerKills>(IntPtr.Add(BaseAddress, pointerAddressKills));
             gameMemoryValues._itemID = memoryAccess.GetAt<InventoryIDs>(IntPtr.Add(BaseAddress, pointerAddressLastItemID));
-
-            gameMemoryValues._player = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP));
-            gameMemoryValues._playerName = "Leon: ";
-
-            gameMemoryValues._player2 = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP2));
-            gameMemoryValues._playerName2 = "Ashley: ";
 
             gameMemoryValues._player = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP));
             gameMemoryValues._playerName = "Leon: ";

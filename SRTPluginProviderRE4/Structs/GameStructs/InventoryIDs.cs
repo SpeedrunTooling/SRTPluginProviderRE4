@@ -236,7 +236,7 @@ namespace SRTPluginProviderRE4.Structs.GameStructs
             { 215, "golden lynx w/ ( b )" },
             { 216, "golden lynx w/ ( g, r )" },
             { 217, "golden lynx w/ ( g, b )" },
-            { 218, "golden lynx w/ ( r, b") },
+            { 218, "golden lynx w/ ( r, b )" },
             { 219, "golden lynx w/ ( g, r, b )" },
             { 220, "leon w/ rocket launcher" },
             { 221, "leon w/ shotgun" },

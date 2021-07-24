@@ -21,6 +21,12 @@ namespace SRTPluginProviderRE4
         public GameSaveData GameData { get => _gameData; set => _gameData = value; }
         internal GameSaveData _gameData;
 
+        public PlayerKills GamePlayerKills { get => _playerKills; set => _playerKills = value; }
+        internal PlayerKills _playerKills;
+
+        public InventoryIDs GamePlayerItemID { get => _itemID; set => _itemID = value; }
+        internal InventoryIDs _itemID;
+
         public GamePlayer Player { get => _player; set => _player = value; }
         internal GamePlayer _player;
 
@@ -32,6 +38,7 @@ namespace SRTPluginProviderRE4
 
         public string PlayerName2 { get => _playerName2; set => _playerName2 = value; }
         internal string _playerName2;
+        
         public TimeSpan IGTTimeSpan
         {
             get

@@ -17,6 +17,10 @@ namespace SRTPluginProviderRE4
 
         // Pointer Address Variables
         private int pointerAddressGameData;
+        private int pointerAddressKills;
+        private int pointerAddressLastItemID;
+        private int pointerAddressHP;
+        private int pointerAddressHP2;
 
         private int pointerAddressHP;
         private int pointerAddressHP2;
@@ -49,6 +53,8 @@ namespace SRTPluginProviderRE4
         private void SelectPointerAddresses()
         {
             pointerAddressGameData = 0x85F6F4;
+            pointerAddressKills = 0x862BC4;
+            pointerAddressLastItemID = 0x858EE4;
             pointerAddressHP = 0x85F714;
             pointerAddressHP2 = 0x85F718;
         }
@@ -57,6 +63,14 @@ namespace SRTPluginProviderRE4
         {
             // Game Data
             gameMemoryValues._gameData = memoryAccess.GetAt<GameSaveData>(IntPtr.Add(BaseAddress, pointerAddressGameData));
+            gameMemoryValues._playerKills = memoryAccess.GetAt<PlayerKills>(IntPtr.Add(BaseAddress, pointerAddressKills));
+            gameMemoryValues._itemID = memoryAccess.GetAt<InventoryIDs>(IntPtr.Add(BaseAddress, pointerAddressLastItemID));
+
+            gameMemoryValues._player = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP));
+            gameMemoryValues._playerName = "Leon: ";
+
+            gameMemoryValues._player2 = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP2));
+            gameMemoryValues._playerName2 = "Ashley: ";
 
             gameMemoryValues._player = memoryAccess.GetAt<GamePlayer>(IntPtr.Add(BaseAddress, pointerAddressHP));
             gameMemoryValues._playerName = "Leon: ";

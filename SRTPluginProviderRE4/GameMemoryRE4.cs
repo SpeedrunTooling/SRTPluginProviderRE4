@@ -1,11 +1,13 @@
 ﻿
-using System;
-using System.Globalization;
-using System.Runtime.InteropServices;
 using SRTPluginProviderRE4.Structs;
 using SRTPluginProviderRE4.Structs.GameStructs;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SRTPluginProviderRE4
 {
@@ -16,6 +18,10 @@ namespace SRTPluginProviderRE4
 
         // Versioninfo
         public string VersionInfo => FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
+
+        // GameInfo
+        public string GameInfo { get => _gameInfo; set => _gameInfo = value; }
+        internal string _gameInfo;
 
         // Game Data
         public GameSaveData GameData { get => _gameData; set => _gameData = value; }
@@ -39,6 +45,21 @@ namespace SRTPluginProviderRE4
         public string PlayerName2 { get => _playerName2; set => _playerName2 = value; }
         internal string _playerName2;
         
+        public EnemyHP[] EnemyHealth { get => _enemyHealth; set => _enemyHealth = value; }
+        internal EnemyHP[] _enemyHealth;
+
+        public int AttacheCaseId { get => _attacheCaseId; set => _attacheCaseId = value; }
+        internal int _attacheCaseId;
+
+        public int AttacheCaseWidth { get => _attacheCaseWidth; set => _attacheCaseWidth = value; }
+        internal int _attacheCaseWidth;
+
+        public int AttacheCaseHeight { get => _attacheCaseHeight; set => _attacheCaseHeight = value; }
+        internal int _attacheCaseHeight;
+
+        public List<InventoryItem> InventoryItems { get => _inventoryItems; set => _inventoryItems = value; }
+        internal List<InventoryItem> _inventoryItems = new List<InventoryItem>();
+
         public TimeSpan IGTTimeSpan
         {
             get
@@ -51,6 +72,24 @@ namespace SRTPluginProviderRE4
                     timespanIGT = new TimeSpan();
 
                 return timespanIGT;
+            }
+        }
+
+        public string InventoryDebugString
+        {
+            get
+            {
+                if (_inventoryItems == null || _inventoryItems.Count == 0)
+                    return "No Items";
+
+                var sb = new StringBuilder();
+
+                foreach (var item in _inventoryItems)
+                {
+                    sb.AppendLine($"{item.Name} ({item.Amount}) @ [{item.GridX},{item.GridY}]");
+                }
+
+                return sb.ToString();
             }
         }
 
